@@ -43,7 +43,7 @@ sudo chmod g+rwx bin
 sudo chmod g+r bin/*
 ```
 
-## Systemd Cetnos 7
+## Systemd Centos 7
 Create File For Service Systemctl
 ```
 sudo vi /etc/systemd/system/tomcat.service
