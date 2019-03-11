@@ -29,6 +29,12 @@ Create Link Tomcat:
 cd /usr/local/
 ln -s /usr/local/tomcat7.90 tomcat
 ```
+
+```
+sudo groupadd tomcat
+sudo mkdir /usr/local/tomcat
+sudo useradd -s /bin/nologin -g tomcat -d /usr/local/tomcat tomcat
+```
 Permission Tomcat:
 ```
 cd /usr/local/tomcat
