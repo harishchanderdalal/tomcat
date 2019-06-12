@@ -117,7 +117,7 @@ Restart Tomcat with UI:
 ```
 sudo systemctl restart tomcat.service
 ```
-Check Service and Reload Daemon:
+Check Service & Reload Daemon:
 ```
 systemctl list-units
 sudo systemctl daemon-reload
