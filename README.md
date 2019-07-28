@@ -22,18 +22,12 @@ Version Tomcat:
 version List :- https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.90/bin/
 cd ~
 wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.90/bin/apache-tomcat-7.0.90.tar.gz
-sudo tar -zxvf apache-tomcat-8.0.33.tar.gz -C /usr/local/tomcat7.90 --strip-components=1
-```
-Create Link Tomcat:
-```
-cd /usr/local/
-ln -s /usr/local/tomcat7.90 tomcat
 ```
 
 ```
 sudo groupadd tomcat
-sudo mkdir /usr/local/tomcat
 sudo useradd -s /bin/nologin -g tomcat -d /usr/local/tomcat tomcat
+sudo tar -zxvf apache-tomcat-7.0.90.tar.gz -C /usr/local/tomcat --strip-components=1
 ```
 Permission Tomcat:
 ```
@@ -63,18 +57,18 @@ After=syslog.target network.target
 [Service]
 Type=forking
 
-Environment=JAVA_HOME=/usr/lib/jvm/jre
-Environment=CATALINA_PID=/usr/local/tomcat/temp/tomcat.pid
-Environment=CATALINA_HOME=/usr/local/tomcat
-Environment=CATALINA_BASE=/usr/local/tomcat
-Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
-Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
-
-ExecStart=/usr/local/tomcat/bin/startup.sh
-ExecStop=/bin/kill -15 $MAINPID
-
 User=tomcat
 Group=tomcat
+
+Environment=JAVA_HOME=/usr/lib/jvm/jre
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+Environment=CATALINA_BASE=/usr/local/tomcat
+Environment=CATALINA_HOME=/usr/local/tomcat
+Environment=CATALINA_PID=/usr/local/tomcat/temp/tomcat.pid
+Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+
+ExecStart=/usr/local/tomcat/bin/startup.sh
+ExecStop=/usr/local/tomcat/bin/shutdown.sh
 
 [Install]
 WantedBy=multi-user.target
